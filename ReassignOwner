@@ -1,0 +1,51 @@
+function reassignOwner() {
+  var masterFolder = DriveApp.getFolderById(folderID);
+  childFolders = masterFolder.getFolders();
+  while(childFolders.hasNext()){
+    try{
+      var child = childFolders.next();
+      Logger.log(child.getName());
+      var grandchildFolders = child.getFolders();
+      while(grandchildFolders.hasNext()){
+        try{
+          var grandchild = grandchildFolders.next();
+          Logger.log(grandchild.getName());
+          grandchild.setOwner(newOwnerEmail);
+        }
+        catch(e){
+          Logger.log(grandchild.getName() + "; unexpected error: " + e);
+        }
+      }
+      child.setOwner(newOwnerEmail);
+    } 
+    catch(e){
+      Logger.log(child.getName() + "; unexpected error: " + e);
+    }
+  }
+}
+
+function reassignOwner2(){
+  var masterFolder = DriveApp.getFolderById(folderID);
+  for(var i = firstRoomNumber; i <= LastRoomNumber; i++){
+    try{
+      Logger.log(i.toString());
+      var childFolders = masterFolder.getFoldersByName(i.toString());
+      var child = childFolders.next();
+      Logger.log(child.getName());
+      grandChildFolders = child.getFolders();
+      while(grandChildFolders.hasNext()){
+        try{
+          var grandchild = grandChildFolders.next();
+          Logger.log(grandchild.getName());
+          grandchild.setOwner(newOwnerEmail);
+        }
+        catch (e){
+          Logger.log(grandchild.getName() + "Error: " + e);
+        }
+      }
+    }
+    catch (e){
+      Logger.log("Folder DNE or: " + e);
+    }
+  }
+}
