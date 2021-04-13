@@ -1,0 +1,13 @@
+function newFolder() {
+  var bedrooms = ["A", "B"];
+  for(var i = firstRoomNumber; i <= lastRoomNumber; i++){
+    Logger.log(i.toString());
+    rootFolder = DriveApp.getFolderById(folderID).createFolder(i.toString());
+    Logger.log(rootFolder.getId());
+    for(var j = 0; j < 2; j++){
+      Logger.log(i.toString() + bedrooms[j]);
+      var folderName = i.toString() + bedrooms[j];
+      var newerFolder = DriveApp.getFolderById(rootFolder.getId()).createFolder(folderName);
+    }
+  }
+}
