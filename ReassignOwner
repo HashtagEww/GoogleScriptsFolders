@@ -32,6 +32,7 @@ function reassignOwner2(){
       var childFolders = masterFolder.getFoldersByName(i.toString());
       var child = childFolders.next();
       Logger.log(child.getName());
+      child.setOwner(newOwnerName);
       grandChildFolders = child.getFolders();
       while(grandChildFolders.hasNext()){
         try{
